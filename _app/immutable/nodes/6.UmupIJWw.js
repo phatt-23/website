@@ -1,0 +1,46 @@
+import"../chunks/DsnmJJEf.js";import{d as ue,b as he,s as ge}from"../chunks/kmNpuAZe.js";import{p as ve,M as fe,f as L,z as me,d as y,s as C,t as V,B as g,b as E,c as Ie,E as b,D as B,$ as Ce,r as x,A as ee,an as K,ao as _e,a as te,ap as se}from"../chunks/D1gJg5gW.js";import{s as Se,i as S,a as Ee}from"../chunks/ntNUJhCQ.js";import{l as Re,r as ye}from"../chunks/DnhBb1Nf.js";import{N as w,d as T,f as D,g as f,E as N,G as be,u as xe,R as $e,b as Pe,U as Z,P as we,h as Te,j as De}from"../chunks/TWPTmQMR.js";import{E as Ne,C as ke}from"../chunks/CUgJFBkp.js";import{C as He,a as Me}from"../chunks/CN7djGBc.js";import{R as G}from"../chunks/BVb8Xddv.js";const Oe=!0,et=Object.freeze(Object.defineProperty({__proto__:null,prerender:Oe},Symbol.toStringTag,{value:"Module"}));class Ue{decode(i,e){console.debug(e.path);const r=new Array;e.path.forEach(d=>{const $=d.id.lastIndexOf(w),I=d.id.lastIndexOf(T),P=d.id.lastIndexOf(D),l=Math.max($,I,P),j=d.id.slice(f.length,l);r.push(j)});const a=new Array;let n;for(let d=0;d<r.length;d++)n!=r[d]&&(n=r[d],a.push({id:f+n}));return new He(a)}}class Le{inInstance;nodeDist=80;tripletDist=6*this.nodeDist;nodeCount;circum;radius;radStep;startRot;constructor(i){if(i.empty())throw new Error("Reducer doesn't accept empty graphs (Graph with node nodes).");this.inInstance=i,this.nodeCount=i.nodes.length,this.circum=this.tripletDist*this.nodeCount,this.radius=this.circum/(2*Math.PI),this.radStep=2*Math.PI/this.nodeCount,this.startRot=.5*Math.PI}reduce(){const i=[],e=this.createNodeTriplets();i.push(...e.steps);const r=this.connectEdges(e.graph.copy());return i.push(...r.steps),{outInstance:r.graph,steps:i}}stripPrefix(i,e){return i.slice(e.length)}connectEdges(i){const e=[];return this.inInstance.edges.forEach(r=>{const a=r.from.slice(f.length)+D,n=r.to.slice(f.length)+w;i.addEdge({id:N+`${a}-${n}`,from:f+a,to:f+n})}),e.push({id:"connect-edges",title:"Connect edges",description:`
+                <p> 
+                    For every original edge from node <i>a</i> to node <i>b</i>,
+                    connect the node <i>a_out</i> with the node <i>b_in</i>.
+                </p>
+                <p>
+                    In this particular case, add these edges:
+                    <ul>
+                        ${this.inInstance.edges.map(r=>{const a=this.stripPrefix(r.from,N)+D,n=this.stripPrefix(r.to,N)+w;return`
+                                <li> 
+                                    (${a}, ${n})
+                                </li>
+                            `}).join("")}
+                    </ul>
+                </p>
+            `,inSnapshot:this.inInstance.copy(),outSnapshot:i.copy(),mapping:{}}),{graph:i,steps:e}}createNodeTriplets(){const i=[],e=new be;return this.inInstance.nodes.forEach((r,a)=>{const n=r.id.slice(f.length),d={x:this.radius*Math.cos(a*this.radStep-this.startRot-.2*this.radStep),y:this.radius*Math.sin(a*this.radStep-this.startRot-.2*this.radStep)},$={x:this.radius*Math.cos(a*this.radStep-this.startRot),y:this.radius*Math.sin(a*this.radStep-this.startRot)},I={x:this.radius*Math.cos(a*this.radStep-this.startRot+.2*this.radStep),y:this.radius*Math.sin(a*this.radStep-this.startRot+.2*this.radStep)};e.addNode({id:f+n+w,position:d,classes:r.classes}),e.addNode({id:f+n+T,position:$,classes:r.classes}),e.addNode({id:f+n+D,position:I,classes:r.classes}),e.addEdge({id:N+`${n}${w}-${n}${T}`,from:f+n+w,to:f+n+T}),e.addEdge({id:N+`${n}${D}-${n}${T}`,from:f+n+D,to:f+n+T})}),i.push({id:"create-node-triplets",title:"Create node triplets",description:`
+                <p> 
+                    For each node in the original graph,
+                    create three nodes that represent:
+                    <ul>
+                        <li>
+                            an in-coming node
+                        </li>
+                        <li>
+                            a gap node
+                        </li>
+                        <li>
+                            and an out-going node
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    Connect the in-coming node with the gap-node and the gap-node with the out-going node.
+                </p>
+                <p>
+                    For this particular graph there will be ${this.nodeCount} node ${this.nodeCount==1?"triplet":"triplets"}.
+                    ${this.nodeCount==1?"The triplet is:":"The triplets are:"}
+                    <ul>  
+                        ${this.inInstance.nodes.map(r=>{const a=r.id.slice(f.length);return`
+                                <li>
+                                    ${a} - (${a+w}, ${a+T}, ${a+D})
+                                </li>
+                            `}).join("")}
+                    </ul>
+                </p>
+            `,inSnapshot:this.inInstance.copy(),outSnapshot:e.copy(),mapping:{}}),{graph:e,steps:i}}}var Fe=L('<meta name="description" content="Reduction from HCYCLE to HCIRCUIT"/>'),Ye=(F,i)=>i(),Ae=L("<div><!></div> <!> <div><!></div>",1),Ge=L("<span>There are no steps to step through.</span>"),je=L('<div class="panes"><div><!> <!></div> <div><!> <!></div></div>'),Xe=L('<main><h1>HCYCLE to HCIRCUIT reduction</h1> <!> <div class="controls"><button>Reduce</button> <button><!></button> <input type="checkbox" name="showStepperCheckbox"/> <label for="showStepperCheckbox">Show steps</label></div> <!> <!></main>');function tt(F,i){ve(i,!0);const e=()=>Se(d,"$redStore",r),[r,a]=Ee();let n=xe(Re.LS_HCYCLE_HCIRCUIT,new $e),d=n.value;console.debug("input instance:",e().inInstance);let $=B(!1),I=B(!1),P=B(""),l=null;function j(t){console.debug("onEditorChange"),l&&(l.terminate(),l=null,b(I,!1),b(P,"Solving cancelled — formula changed.")),d.update(s=>(s.reset(),s.setInInstance(t),n.save(),s))}function ne(){if(e().inInstance){const t=new Le(e().inInstance),{outInstance:s,steps:u}=t.reduce();d.update(o=>(o.setSteps(u),o.setOutInstance(s),n.save(),o))}}async function oe(){let{inCert:t,outInstance:s,outCert:u}=e();if(!(!s||u)){b(I,!0),b(P,"Solving Hamiltonian circuit..."),l&&(l.terminate(),l=null);try{const o=new Worker(new URL(""+new URL("../workers/WorkerHCIRCUITSolver-CYk0Zlly.js",import.meta.url).href,import.meta.url),{type:"module"});l=o;const U=new Promise((h,_)=>{o.onmessage=v=>{o===l&&(o.terminate(),l=null,h(v.data))},o.onerror=v=>{o===l&&(o.terminate(),l=null,_(v))}});if(o.postMessage(s.toSerializedString()),u=await U,!l&&!g(I))return;if(u==Z)d.update(h=>(h.inCert=Z,h.outCert=Z,h));else{const h=s,_=u.path;h.edges.forEach(c=>c.classes+=" solved");const v=c=>c.slice(c.search(we)+1);for(let c=0;c<_.length-1;c++){const k=v(_[c].id),H=v(_[c+1].id),p=N+`${k}-${H}`,Y=N+`${H}-${k}`,M=h.edges.find(A=>A.id==p||A.id==Y);M&&(h.removeEdge(M),M.classes+=" used",h.addEdge(M))}console.debug("Path",_),console.debug("After class assignment",h.edges),t=new Ue().decode(h,u),d.update(c=>(c.inCert=t,c.outCert=u,c.outInstance=h,c))}n.save()}catch(o){console.error("Error during solving:",o),b(P,"An error occurred while solving.")}finally{b(I,!1),b(P,""),l=null}}}fe(()=>{d.update(t=>(t.resetStepIndex(),t))}),he(()=>{l&&(l.terminate(),l=null)});var X=Xe();me(t=>{var s=Fe();Ce.title="HCYCLE to HCIRCUIT",E(t,s)});var q=C(y(X),2);Ne(q,{get graph(){return e().inInstance},onChange:t=>j(t),onWrongFormat:t=>alert("From graph editor: "+t)});var W=C(q,2),z=y(W);z.__click=ne;var O=C(z,2);O.__click=[Ye,oe];var re=y(O);{var ae=t=>{var s=K("Solving...");E(t,s)},ie=t=>{var s=K("Solve");E(t,s)};S(re,t=>{g(I)?t(ae):t(ie,!1)})}x(O);var J=C(O,2);ye(J),ee(2),x(W);var Q=C(W,2);{var de=t=>{Te(t,{children:(s,u)=>{ee();var o=K();V(()=>ge(o,g(P))),E(s,o)}})};S(Q,t=>{g(I)&&t(de)})}var ce=C(Q,2);{var pe=t=>{const s=se(()=>e().steps),u=se(()=>e().stepIndex);var o=_e(),U=te(o);{var h=v=>{var R=Ae(),c=te(R),k=y(c);{var H=m=>{G(m,{get graph(){return g(s)[g(u)].inSnapshot},style:"DIRECTED",layout:"circle"})};S(k,m=>{g(u)<g(s).length&&g(s)[g(u)].inSnapshot&&!g(s)[g(u)].inSnapshot.empty()&&m(H)})}x(c);var p=C(c,2);De(p,{get steps(){return e().steps},get stepIndex(){return e().stepIndex},onPrevClick:()=>{d.update(m=>(m.prevStep(),m)),n.save()},onNextClick:()=>{d.update(m=>(m.nextStep(),m)),n.save()}});var Y=C(p,2),M=y(Y);{var A=m=>{G(m,{get graph(){return e().steps[e().stepIndex].outSnapshot},style:"HCIRCUIT",layout:"preset"})};S(M,m=>{e().stepIndex<e().steps.length&&e().steps[e().stepIndex].outSnapshot&&m(A)})}x(Y),E(v,R)},_=v=>{var R=Ge();E(v,R)};S(U,v=>{g(s).length?v(h):v(_,!1)})}E(t,o)},le=t=>{var s=je(),u=y(s),o=y(u);{var U=p=>{G(p,{get graph(){return e().inInstance},style:"DIRECTED",layout:"circle"})};S(o,p=>{e().inInstance&&!e().inInstance.empty()&&p(U)})}var h=C(o,2);{var _=p=>{Me(p,{get cert(){return e().inCert}})};S(h,p=>{e().inCert&&p(_)})}x(u);var v=C(u,2),R=y(v);{var c=p=>{G(p,{get graph(){return e().outInstance},style:"HCIRCUIT",layout:"preset"})};S(R,p=>{e().outInstance&&!e().outInstance.empty()&&p(c)})}var k=C(R,2);{var H=p=>{ke(p,{get cert(){return e().outCert}})};S(k,p=>{e().outCert&&p(H)})}x(v),x(s),E(t,s)};S(ce,t=>{g($)?t(pe):t(le,!1)})}x(X),V((t,s)=>{z.disabled=t,O.disabled=s},[()=>!e().hasInInstance()||e().hasOutInstance()||g(I),()=>!e().hasInstances()||e().hasOutCertificate()||g(I)]),Pe(J,()=>g($),t=>b($,t)),E(F,X),Ie(),a()}ue(["click"]);export{tt as component,et as universal};
