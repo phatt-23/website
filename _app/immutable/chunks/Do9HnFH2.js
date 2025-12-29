@@ -1,1 +1,0 @@
-import{S as c}from"./C4ZxoCtr.js";var p=Object.getOwnPropertyDescriptor,C=(r,a,o,s)=>{for(var e=s>1?void 0:s?p(a,o):a,t=r.length-1,l;t>=0;t--)(l=r[t])&&(e=l(e)||e);return e};let i=class{constructor(r){this.path=r}};i=C([c.SerializableClass()],i);export{i as C};
